@@ -45,18 +45,31 @@ public class RdvController {
         return ResponseEntity.ok(annuler); 
     }
 
-    @PutMapping("/confirmer")
+    @PutMapping("/confirmerRdv")
     public ResponseEntity<Rdv> confirmerRdv(@RequestBody Rdv rdv){
         Rdv confirme = rdvService.confirmerRdv(rdv); 
         return ResponseEntity.ok(confirme); 
     }
 
 
-    // @PutMapping("/verifier")
-    // public ResponseEntity<String> verifierRdv(@RequestBody Rdv rdv){
-    //    )
+    @PutMapping("/verifierRdv")
+        public ResponseEntity<String> verifierRdv(@RequestBody Rdv rdv){
+            String message = rdvService.verifierRdv(rdv);
+            return ResponseEntity.ok(message);
+    }
+
+    @PutMapping("/modifierRdv")
+    public ResponseEntity<Rdv> modifierRdv(@RequestBody RdvRequest rdvRequest) {
         
-    // }
+        Rdv oldRdv = rdvService.findById(rdvRequest.rdv().getIdRdv());
+
+        if(oldRdv == null){
+            return ResponseEntity.notFound().build();
+        }
+        Rdv modifie = rdvService.modifierRdv(oldRdv, rdvRequest.rdv());
+        
+        return ResponseEntity.ok(modifie);
+    }
 
 
 
