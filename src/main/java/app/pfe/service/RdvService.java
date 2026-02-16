@@ -102,6 +102,13 @@ public class RdvService {
     }
 
 
+    public Rdv findById(int idRdv) {
+        Rdv rdv = rdvRepository.findById(idRdv)
+        .orElseThrow(() -> new IllegalArgumentException("Aucun rendez vous avec cet Id"));
+        return rdv;
+    }
+
+
 
 
 
