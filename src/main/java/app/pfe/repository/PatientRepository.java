@@ -10,10 +10,10 @@ import app.pfe.entity.Patient;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
-    public Optional<Patient> findByEmail(String email);
+    public Optional<Patient> findByEmailPatient(String email);
 
-    public boolean existByEmail(String email);
+    public boolean existsByEmailPatient(String email);
 
-    public boolean deletePatientByEmail(String email);
+    public boolean deleteByEmailPatient(String email);
     
 }
