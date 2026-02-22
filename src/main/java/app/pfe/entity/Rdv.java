@@ -24,12 +24,22 @@ public class Rdv{
     @JoinColumn(name = "idDocteur")
     private Docteur docteur;
 
+    
 
 
-    public Rdv(LocalDateTime dateRdv, String heureRdv) {
+    public Rdv(){
+
+    }
+
+
+    public Rdv(LocalDateTime dateRdv, String heureRdv,Patient patient,Docteur docteur) {
         this.dateRdv = dateRdv;
         this.heureRdv = heureRdv;
+        this.patient = patient;
+        this.docteur = docteur;
     }
+
+    
 
     
     public int getIdRdv() {
@@ -68,6 +78,16 @@ public class Rdv{
     }
     public void setDocteur(Docteur docteur) {
         this.docteur = docteur;
+    }
+
+    @Override
+    public String toString(){
+        return "Rendez-vous : \n" +
+                "date=" + dateRdv + "\n" +
+                "heure=" + heureRdv + "\n" +
+                "status=" + statusRdv + "\n" +
+                "patient=" + (patient != null ? patient.getNomPatient() : "Aucun patient") + "\n" +
+                "docteur=" + (docteur != null ? docteur.getNomDocteur() : "Aucun docteur") + "\n";
     }
 
     

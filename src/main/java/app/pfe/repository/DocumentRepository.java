@@ -9,23 +9,21 @@ import org.springframework.stereotype.Repository;
 import app.pfe.entity.Document;
 
 @Repository
-public interface  DocumentRepository extends JpaRepository<Document, Integer> {
+public interface DocumentRepository extends JpaRepository<Document, Integer> {
 
-    Document findDocumentByDocteurEmail(String email);
+    // Vérifier si un document existe déjà pour un docteur identifié par email
+    boolean existsByNomDocumentAndDocteur_EmailDocteur(String nomDocument, String emailDocteur); 
+    
+    // Récupérer tous les documents d’un docteur par email
+    List<Document> findByDocteur_EmailDocteur(String emailDocteur);
+    
+    // Récupérer un document précis par nom et email du docteur
+    Optional<Document> findByNomDocumentAndDocteur_EmailDocteur(String nomDocument, String emailDocteur); 
+    
+    // Supprimer un document par nom et email du docteur
+    void deleteByNomDocumentAndDocteur_EmailDocteur(String nomDocument, String emailDocteur);
 
-    // Vérifier si un document existe déjà pour un docteur identifié par email 
-    boolean existsByNomDocumentAndDocteur_Email(String nomDocument, String email); 
-    
-    // Récupérer tous les documents d’un docteur par email 
-    List<Document> findByDocteur_Email(String email);
-    
-    // Récupérer un document précis par nom et email du docteur 
-    
-    Optional<Document> findByNomDocumentAndDocteur_Email(String nomDocument, String email); 
-    
-    // Supprimer un document par nom et email du docteur 
-    void deleteByNomDocumentAndDocteur_Email(String nomDocument, String email);
-
-    Optional<Document> findByNameDocument(String nomDocument);
-    
+    // Récupérer un document par son nom
+    Optional<Document> findByNomDocument(String nomDocument);
 }
+

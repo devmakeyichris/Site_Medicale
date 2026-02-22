@@ -1,8 +1,11 @@
 package app.pfe.service;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import app.pfe.entity.Docteur;
 import app.pfe.entity.Patient;
 import app.pfe.repository.PatientRepository;
 
@@ -16,8 +19,8 @@ public class PatientService {
     }
 
     public Patient savePatient(Patient patient) {
-        if(patientRepository.existByEmail(patient.getEmailPatient())){
-            new IllegalArgumentException("Un patient avec cet email exist deja");
+        if(patientRepository.existsByEmailPatient(patient.getEmailPatient())){
+            throw new IllegalArgumentException("Un patient avec cet email existe déjà");
         }
         patientRepository.save(patient);
         return patient;
@@ -40,7 +43,7 @@ public boolean SuprimerPatient(Patient patient){
 }
 
 public void supprimerPatientParEmail(String email){
-    Patient patient = patientRepository.findByEmail(email)
+    Patient patient = patientRepository.findByEmailPatient(email)
     .orElseThrow(() -> new IllegalArgumentException("Aucun patient ne possede cet email"));
     patientRepository.delete(patient);
 }
@@ -50,6 +53,11 @@ public Patient RecherchPatientparId(int idPAtient){
     .orElseThrow(() -> new IllegalArgumentException("le patient avec l'id " + idPAtient + " est introuvable"));
     return patient;
 }
+
+
+public List<Patient>  getAllPatient(){
+        return patientRepository.findAll();
+    }
 
 
 

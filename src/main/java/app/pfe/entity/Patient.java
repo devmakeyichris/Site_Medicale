@@ -19,9 +19,12 @@ public class Patient {
     private String adressePatient;
     private String telPatient;
 
-    
-    public Patient(String nomPatient, String prenomPatient, String dNaissPatient, String sexePatient,
-            String emailPatient, String villePatient, String adressePatient, String telPatient) {
+    public Patient(){
+        
+    }
+
+
+    public Patient(String nomPatient, String prenomPatient, String dNaissPatient, String sexePatient,String emailPatient, String villePatient, String adressePatient, String telPatient) {
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
         this.dNaissPatient = dNaissPatient;
@@ -31,6 +34,8 @@ public class Patient {
         this.adressePatient = adressePatient;
         this.telPatient = telPatient;
     }
+
+    
 
     @OneToMany(mappedBy="patient")
     private List<Rdv> rdvs;
@@ -96,6 +101,22 @@ public class Patient {
     public void setTelPatient(String telPatient) {
         this.telPatient = telPatient;
     }
+
+    @Override
+public String toString() {
+    return
+            "nom=" + nomPatient + '\n' +
+            "prenom=" + prenomPatient + '\n' +
+            "dateNaissance=" + dNaissPatient + '\n' +
+            "sexe=" + sexePatient + '\n' +
+            "email=" + emailPatient + '\n' +
+            "ville=" + villePatient + '\n' +
+            "adresse=" + adressePatient + '\n' +
+            "tel=" + telPatient + '\n' +
+            "NbRdv = " + (rdvs != null ? rdvs.size() : 0) + '\n'
+            ;
+}
+
 
 
 }

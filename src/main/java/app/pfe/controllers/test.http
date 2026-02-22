@@ -1,0 +1,13 @@
+PUT http://localhost:8080/modifierRdv
+Content-Type: application/json
+
+{
+  "idPatient": 1,
+  "idDocteur": 2,
+  "rdv": {
+    "idRdv": 5,
+    "dateRdv": "2026-02-20T10:00",
+    "heureRdv": "10:00",
+    "statusRdv": "ATTENTE"
+  }
+}

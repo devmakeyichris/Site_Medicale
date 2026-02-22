@@ -1,6 +1,7 @@
 package app.pfe.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -106,6 +107,10 @@ public class RdvService {
         Rdv rdv = rdvRepository.findById(idRdv)
         .orElseThrow(() -> new IllegalArgumentException("Aucun rendez vous avec cet Id"));
         return rdv;
+    }
+
+    public List<Rdv> getAllRdv(){
+        return rdvRepository.findAll();
     }
 
 

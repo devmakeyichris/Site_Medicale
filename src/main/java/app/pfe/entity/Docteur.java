@@ -2,7 +2,12 @@ package app.pfe.entity;
 
 import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -22,6 +27,7 @@ public class Docteur {
     private String descDocteur;
     private Boolean valider;
 
+
     
 
     @OneToMany(mappedBy = "docteur",cascade = CascadeType.ALL)
@@ -34,7 +40,9 @@ public class Docteur {
     private List<Rdv> rdvs;
 
 
-
+    public Docteur(){
+        
+    }
     public Docteur(String nomDocteur, String prenomDocteur, String emailDocteur, String telephoneDocteur,
             String adresseDocteur, String villeDocteur, String specialiteDocteur, String descDocteur,
             List<Document> documents) {
@@ -116,5 +124,31 @@ public class Docteur {
     public void setRdvs(List<Rdv> rdvs) {
         this.rdvs = rdvs;
     }
+
+
+    @Override
+public String toString() {
+    return
+            "nom=" + nomDocteur + '\n' +
+            "prenom=" + prenomDocteur + '\n' +
+            "email=" + emailDocteur + '\n' +
+            "telephone=" + telephoneDocteur + '\n' +
+            "adresse=" + adresseDocteur + '\n' +
+            "ville=" + villeDocteur + '\n' +
+            "specialite=" + specialiteDocteur + '\n' +
+            "description=" + descDocteur + '\n' +
+            "NbDocuments=" + (documents != null ? documents.size() : 0 ) + "\n" +
+            "NbRdv = " + (rdvs != null ? rdvs.size() : 0) + '\n'
+            ;
+}
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+
     
 }
