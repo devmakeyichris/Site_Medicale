@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import app.pfe.entity.Docteur;
 import app.pfe.entity.Patient;
 import app.pfe.repository.PatientRepository;
+
 
 @Service
 public class PatientService {
@@ -18,7 +18,10 @@ public class PatientService {
         this.patientRepository = patientRepository;
     }
 
-    public Patient savePatient(Patient patient) {
+
+
+
+    public Patient addPatient(Patient patient) {
         if(patientRepository.existsByEmailPatient(patient.getEmailPatient())){
             throw new IllegalArgumentException("Un patient avec cet email existe déjà");
         }
@@ -26,29 +29,37 @@ public class PatientService {
         return patient;
     }
 
-    public Patient modifInfoPatient(Patient oldInfoPatient, Patient newInfoPatient) {
 
-        BeanUtils.copyProperties(newInfoPatient, oldInfoPatient, "idPatient");
+    public Patient updatePatient(int idPatient, Patient newInfoPatient) {
+
+        Patient oldInfoPatient = patientRepository.findById(idPatient)
+        .orElseThrow(() -> new IllegalArgumentException("Patient introuvable"));
+
+    BeanUtils.copyProperties(newInfoPatient, oldInfoPatient, "idPatient");
     
     return patientRepository.save(oldInfoPatient);
 }
 
 
-public boolean SuprimerPatient(Patient patient){
-    if(patientRepository.existsById(patient.getIdPatient())){
-        patientRepository.delete(patient);
+
+public boolean deletePatientById(int idPatient){
+    if(patientRepository.existsById(idPatient)){
+        patientRepository.deleteById(idPatient);
+        return true;
     }
     return false;
 
 }
 
-public void supprimerPatientParEmail(String email){
+public Boolean deletePatientByEmail(String email){
+
     Patient patient = patientRepository.findByEmailPatient(email)
     .orElseThrow(() -> new IllegalArgumentException("Aucun patient ne possede cet email"));
     patientRepository.delete(patient);
+    return true;
 }
 
-public Patient RecherchPatientparId(int idPAtient){
+public Patient findPatientById(int idPAtient){
     Patient patient = patientRepository.findById(idPAtient)
     .orElseThrow(() -> new IllegalArgumentException("le patient avec l'id " + idPAtient + " est introuvable"));
     return patient;

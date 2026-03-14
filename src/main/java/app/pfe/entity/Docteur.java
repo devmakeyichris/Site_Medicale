@@ -20,6 +20,7 @@ public class Docteur {
     private String nomDocteur;  
     private String prenomDocteur; 
     private String emailDocteur; 
+    private String motDePasseDocteur;
     private String telephoneDocteur; 
     private String adresseDocteur; 
     private String villeDocteur; 
@@ -43,12 +44,13 @@ public class Docteur {
     public Docteur(){
         
     }
-    public Docteur(String nomDocteur, String prenomDocteur, String emailDocteur, String telephoneDocteur,
+    public Docteur(String nomDocteur, String prenomDocteur, String emailDocteur,String motDePasseDocteur, String telephoneDocteur,
             String adresseDocteur, String villeDocteur, String specialiteDocteur, String descDocteur,
             List<Document> documents) {
         this.nomDocteur = nomDocteur;
         this.prenomDocteur = prenomDocteur;
         this.emailDocteur = emailDocteur;
+        this.motDePasseDocteur = motDePasseDocteur;
         this.telephoneDocteur = telephoneDocteur;
         this.adresseDocteur = adresseDocteur;
         this.villeDocteur = villeDocteur;
@@ -148,6 +150,14 @@ public String toString() {
 
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
+    }
+
+    public String getMotDePasseDocteur() {
+        return motDePasseDocteur;
+    }
+
+    public void setMotDePasseDocteur(String motDePasseDocteur) {
+        this.motDePasseDocteur = motDePasseDocteur;
     }
 
     

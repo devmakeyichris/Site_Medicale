@@ -27,7 +27,7 @@ public class RdvService {
     }
 
 
-    public Rdv creerRdv(Rdv rdv, int idPatient, int idDocteur){
+    public Rdv addRdv(Rdv rdv, int idPatient, int idDocteur){
 
         Docteur idDoc = docteurRepository.findById(idDocteur).
         orElseThrow(() -> new IllegalArgumentException("Le docteur ayant l'id" + idDocteur +"n'existe pas !"));
@@ -35,7 +35,7 @@ public class RdvService {
         Patient idPat = patientRepository.findById(idPatient).
         orElseThrow(() -> new IllegalArgumentException("Le patient ayant l'id" + idPatient + "n'existe pas !"));
 
-        boolean dejaPris = verifierDisponibiliteRdv(rdv);
+        boolean dejaPris = checkDisponibilitesRdv(rdv);
 
         if(dejaPris){
             throw new IllegalArgumentException("Ce creneau est deja pris !");
@@ -53,7 +53,7 @@ public class RdvService {
 
 
 
-    public String verifierRdv(Rdv rdv) {
+    public String checkRdv(Rdv rdv) {
         LocalDateTime maintenant = LocalDateTime.now();
 
         if (rdv.getDateRdv().isBefore(maintenant.plusHours(24))) {//si le rendez‑vous est prévu dans moins de 24h.
@@ -62,7 +62,7 @@ public class RdvService {
         return "Rendez-vous toujours en attente de confirmation.";
     }
 
-    public Rdv confirmerRdv(Rdv rdv) {
+    public Rdv confirmRdv(Rdv rdv) {
 
     rdv.setStatusRdv("CONFIRMÉ");
 
@@ -72,7 +72,7 @@ public class RdvService {
 
     
 
-    public boolean verifierDisponibiliteRdv(Rdv rdv){
+    public boolean checkDisponibilitesRdv(Rdv rdv){
 
         LocalDateTime dateRdv = rdv.getDateRdv();
 
@@ -87,7 +87,7 @@ public class RdvService {
 
 
 
-    public Rdv modifierRdv(Rdv oldRdv, Rdv newRdv){
+    public Rdv updateRdv(Rdv oldRdv, Rdv newRdv){
 
         BeanUtils.copyProperties(newRdv, oldRdv, "idRdv");
         return rdvRepository.save(oldRdv);
@@ -96,7 +96,7 @@ public class RdvService {
     }
 
 
-    public Rdv annulerRdv(Rdv rdv){
+    public Rdv deleteRdv(Rdv rdv){
 
         rdv.setStatusRdv("ANNULE");
         return rdvRepository.save(rdv);
@@ -111,6 +111,17 @@ public class RdvService {
 
     public List<Rdv> getAllRdv(){
         return rdvRepository.findAll();
+    }
+ 
+    
+    public List<Rdv> getRdvsByPatientId(int idPatient) { 
+        
+        return rdvRepository.findByPatient_IdPatient(idPatient); 
+    } 
+    
+    public List<Rdv> getRdvsByDocteurId(int idDocteur) { 
+
+        return rdvRepository.findByDocteur_IdDocteur(idDocteur);
     }
 
 

@@ -1,6 +1,7 @@
 package app.pfe.service;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import app.pfe.entity.Document;
@@ -27,45 +28,63 @@ public class DocumentService {
 
     // Ajouter un document
 
-    public Document DocumentAjouterDocument(Document document) { 
+    public Document AddDocument(Document document) { 
         
-        if (documentRepository.existsByNomDocumentAndDocteur_EmailDocteur(document.getNomDocument(), document.getDocteur().getEmailDocteur())){ 
-            throw new IllegalArgumentException("Ce docteur a déjà un document avec ce nom."); 
-        } 
-        return documentRepository.save(document); 
-    } 
+        if (documentRepository.existsByName(document.getNameDocument())){
+            new IllegalArgumentException("Ce document exist deja !");
+        }
+
+        documentRepository.save(document);
+        return document;
+    }
 
 
 
     
-    // Ajouter un document avec gestion d'erreur
     
-    public Document modifierDocument(String nomDocument, Document nouveauDocument) { 
+    public Document updateDocument(String nomDocument, Document nouveauDocument) { 
         
         Document document = documentRepository.findByNomDocument(nomDocument) 
         .orElseThrow(() -> new IllegalArgumentException("Document introuvable.")); 
         
-        if (!document.getNomDocument().equals(nouveauDocument.getNomDocument()) && documentRepository.existsByNomDocumentAndDocteur_EmailDocteur(nouveauDocument.getNomDocument(), document.getDocteur().getEmailDocteur())){ 
-            throw new IllegalArgumentException("Ce docteur a déjà un document avec ce nom."); 
-        }
-        document.setNomDocument(nouveauDocument.getNomDocument()); document.setTypeDocument(nouveauDocument.getTypeDocument()); document.setUrlDocument(nouveauDocument.getUrlDocument()); return documentRepository.save(document); 
+        BeanUtils.copyProperties(document,nouveauDocument,"idDocument");
+        return documentRepository.save(document); 
     }
-    //Bouton nom document
+    //Bouton nom document         
 
 
-    // Supprimer un document par nom et email du docteur 
-    public void supprimerDocumentParNomEtEmail(String nomDocument, String email) {
-        documentRepository.deleteByNomDocumentAndDocteur_EmailDocteur(nomDocument, email); 
+    // Supprimer un document par nom 
+    public boolean deleteDocumentByName(String nomDocument) {
+        if(documentRepository.existsByName(nomDocument)){
+
+            documentRepository.deleteByName(nomDocument); 
+            return true;
+
+        }
+        return false;
+        
+    }
+
+    public boolean deleteDocumentById(int idDocument){
+        if(documentRepository.existsById(idDocument)){
+            documentRepository.deleteById(idDocument);
+            return true;
+        }
+        return false;
+
     }
     //Bouton supprimer document
 
 
 
-    // Lister les documents d’un docteur par email 
-    public List<Document> listerDocumentsParDocteur(String email) { 
+    // Lister les documents d’un docteur par id
+    public List<Document> findDocumentByIdDocteur(int id) { 
 
-        return documentRepository.findByDocteur_EmailDocteur(email); 
+        return documentRepository.findByDocteur_IdDocteur(id); 
     }
+
+
+
 }
 
 

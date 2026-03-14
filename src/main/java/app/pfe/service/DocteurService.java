@@ -9,28 +9,33 @@ import app.pfe.entity.Docteur;
 import app.pfe.entity.Document;
 import app.pfe.entity.Rdv;
 import app.pfe.repository.DocteurRepository;
+import app.pfe.repository.DocumentRepository;
 
 @Service
 public class DocteurService {
 
     private final  DocteurRepository docteurRepository;
+    private final DocumentRepository documentRepository;
 
-    public DocteurService(DocteurRepository docteurRepository) {
+    public DocteurService(DocteurRepository docteurRepository,DocumentRepository documentRepository) {
         this.docteurRepository = docteurRepository;
+        this.documentRepository = documentRepository;
     }
 
 
 
 
 
-    public boolean saveDocteur(Docteur docteur){
+    public Docteur addDocteur(Docteur docteur){
         if(docteurRepository.existsDocteurByEmailDocteur(docteur.getEmailDocteur())){
             throw new IllegalArgumentException("Cet email existe deja");
         }
         docteur.setValider(false);
         docteurRepository.save(docteur);
-        return true;
+        return docteur;
     }
+
+    
 
 
 
@@ -40,6 +45,8 @@ public class DocteurService {
     return docteurRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Docteur non trouvé avec id : " + id));
     }
+
+
 
     public Docteur findDocteurByEmail(String email) {
 
@@ -56,15 +63,28 @@ public class DocteurService {
         return true;
     }
 
+    public boolean deleteDocteurById(int idDocteur){
+        Docteur docteur = docteurRepository.findById(idDocteur)
+        .orElseThrow(() -> new IllegalArgumentException("Ce docteur n'existe pas"));
+
+        docteurRepository.delete(docteur);
+        return true;
+    }
+
     public List<Docteur>  getAllDocteurs(){
         return docteurRepository.findAll();
     }
 
 
-    public Docteur updateDocteur(Docteur oldDocteur, Docteur newDocteur) {
+    public Docteur updateDocteur(int idDocteur, Docteur newDocteur) {
+        Docteur  oldDocteur = docteurRepository.findById(idDocteur)
+        .orElseThrow(() -> new IllegalArgumentException("Ce docteur n'existe pas"));
 
-        BeanUtils.copyProperties(newDocteur, oldDocteur, "idDocteur");
-        return docteurRepository.save(oldDocteur);
+        BeanUtils.copyProperties(oldDocteur,newDocteur,"idDocteur");
+        docteurRepository.save(oldDocteur);
+        return oldDocteur;
+
+    
 }
 
 public List<Rdv> getRdvsByDocteurId(int idDocteur) {

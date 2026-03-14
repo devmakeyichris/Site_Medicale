@@ -3,11 +3,11 @@ Content-Type: application/json
 
 {
   "idPatient": 1,
-  "idDocteur": 2,
+  "idDocteur": 1,
   "rdv": {
-    "idRdv": 5,
+    "idRdv": 1,
     "dateRdv": "2026-02-20T10:00",
-    "heureRdv": "10:00",
+    "heureRdv": "15:00",
     "statusRdv": "ATTENTE"
   }
 }

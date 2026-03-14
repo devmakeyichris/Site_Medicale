@@ -1,9 +1,7 @@
 package app.pfe;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
-import org.hibernate.mapping.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,7 +34,7 @@ public class DemoApplication {
 
             Rdv rdv = new Rdv(LocalDateTime.now(), "10:00", patient, docteur);
             
-            rdvService.creerRdv(rdv, patient.getIdPatient(), docteur.getIdDocteur());
+            rdvService.addRdv(rdv, patient.getIdPatient(), docteur.getIdDocteur());
 
            
 

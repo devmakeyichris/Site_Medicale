@@ -9,7 +9,7 @@ public class Document {
     private int idDocument;
 
 
-    private String nomDocument;
+    private String nameDocument;
     private String typeDocument;
     private String urlDocument;
 
@@ -19,10 +19,10 @@ public class Document {
 
 
 
-    
+    public Document(){}
 
-    public Document(String nomDocument, String typeDocument, String urlDocument,Docteur docteur) {
-        this.nomDocument = nomDocument;
+    public Document(String nameDocument, String typeDocument, String urlDocument,Docteur docteur) {
+        this.nameDocument = nameDocument;
         this.typeDocument = typeDocument;
         this.urlDocument = urlDocument;
         this.docteur = docteur;
@@ -36,12 +36,12 @@ public class Document {
         this.idDocument = idDocument;
     }
 
-    public String getNomDocument() {
-        return nomDocument;
+    public String getNameDocument() {
+        return nameDocument;
     }
 
-    public void setNomDocument(String nomDocument) {
-        this.nomDocument = nomDocument;
+    public void setNameDocument(String nameDocument) {
+        this.nameDocument = nameDocument;
     }
 
     public String getTypeDocument() {

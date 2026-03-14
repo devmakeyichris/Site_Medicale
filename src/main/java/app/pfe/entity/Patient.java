@@ -2,7 +2,11 @@ package app.pfe.entity;
 
 import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Patient {
@@ -13,6 +17,7 @@ public class Patient {
     private String nomPatient;
     private String prenomPatient;
     private String dNaissPatient;
+    private String motDePassePatient;
     private String sexePatient;
     private String emailPatient;
     private String villePatient;
@@ -24,9 +29,10 @@ public class Patient {
     }
 
 
-    public Patient(String nomPatient, String prenomPatient, String dNaissPatient, String sexePatient,String emailPatient, String villePatient, String adressePatient, String telPatient) {
+    public Patient(String nomPatient, String prenomPatient,String motDePassePatient, String dNaissPatient, String sexePatient,String emailPatient, String villePatient, String adressePatient, String telPatient) {
         this.nomPatient = nomPatient;
         this.prenomPatient = prenomPatient;
+        this.motDePassePatient = motDePassePatient;
         this.dNaissPatient = dNaissPatient;
         this.sexePatient = sexePatient;
         this.emailPatient = emailPatient;
@@ -39,6 +45,10 @@ public class Patient {
 
     @OneToMany(mappedBy="patient")
     private List<Rdv> rdvs;
+
+
+
+    
 
     public List<Rdv> getRdvs() {
         return rdvs;
@@ -116,6 +126,14 @@ public String toString() {
             "NbRdv = " + (rdvs != null ? rdvs.size() : 0) + '\n'
             ;
 }
+
+    public String getMotDePassePatient() {
+        return motDePassePatient;
+    }
+
+    public void setMotDePassePatient(String motDePassePatient) {
+        this.motDePassePatient = motDePassePatient;
+    }
 
 
 
