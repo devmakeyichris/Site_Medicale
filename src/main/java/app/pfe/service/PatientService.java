@@ -3,6 +3,7 @@ package app.pfe.service;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import app.pfe.entity.Patient;
@@ -13,9 +14,11 @@ import app.pfe.repository.PatientRepository;
 public class PatientService {
 
     private final PatientRepository patientRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public PatientService(PatientRepository patientRepository) {
+    public PatientService(PatientRepository patientRepository, PasswordEncoder passwordEncoder) {
         this.patientRepository = patientRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -25,6 +28,7 @@ public class PatientService {
         if(patientRepository.existsByEmailPatient(patient.getEmailPatient())){
             throw new IllegalArgumentException("Un patient avec cet email existe déjà");
         }
+        patient.setMotDePassePatient(passwordEncoder.encode(patient.getMotDePassePatient()));
         patientRepository.save(patient);
         return patient;
     }

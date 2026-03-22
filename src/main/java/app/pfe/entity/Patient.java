@@ -23,6 +23,8 @@ public class Patient {
     private String villePatient;
     private String adressePatient;
     private String telPatient;
+   
+
 
     public Patient(){
         

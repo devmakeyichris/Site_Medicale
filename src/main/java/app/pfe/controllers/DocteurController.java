@@ -3,9 +3,13 @@ package app.pfe.controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import app.pfe.entity.Docteur;
 import app.pfe.entity.Document;
@@ -14,15 +18,11 @@ import app.pfe.service.DocteurService;
 import app.pfe.service.DocumentService;
 import app.pfe.service.RdvService;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
-
-@Controller
+@RestController
+@RequestMapping("/docteur")
 public class DocteurController {
 
     private final RdvService rdvService;

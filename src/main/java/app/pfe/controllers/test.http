@@ -1,4 +1,4 @@
-PUT http://localhost:8080/modifierRdv
+PUT http://localhost:8086/updateRdv
 Content-Type: application/json
 
 {

@@ -19,13 +19,13 @@ public interface DocumentRepository extends JpaRepository<Document, Integer> {
     
    
     // Récupérer un document par son nom
-    Optional<Document> findByNomDocument(String nomDocument);
+    Optional<Document> findByNameDocument(String nomDocument);
 
 
 
-    boolean deleteByName(String nomDocument);
+    boolean deleteByNameDocument(String nomDocument);
 
-    boolean existsByName(String nomDocument);
+    boolean existsByNameDocument(String nomDocument);
 
     List<Document> findByDocteur_IdDocteur(int id);
 }

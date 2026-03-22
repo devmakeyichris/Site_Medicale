@@ -30,7 +30,7 @@ public class DocumentService {
 
     public Document AddDocument(Document document) { 
         
-        if (documentRepository.existsByName(document.getNameDocument())){
+        if (documentRepository.existsByNameDocument(document.getNameDocument())){
             new IllegalArgumentException("Ce document exist deja !");
         }
 
@@ -44,7 +44,7 @@ public class DocumentService {
     
     public Document updateDocument(String nomDocument, Document nouveauDocument) { 
         
-        Document document = documentRepository.findByNomDocument(nomDocument) 
+        Document document = documentRepository.findByNameDocument(nomDocument) 
         .orElseThrow(() -> new IllegalArgumentException("Document introuvable.")); 
         
         BeanUtils.copyProperties(document,nouveauDocument,"idDocument");
@@ -55,9 +55,9 @@ public class DocumentService {
 
     // Supprimer un document par nom 
     public boolean deleteDocumentByName(String nomDocument) {
-        if(documentRepository.existsByName(nomDocument)){
+        if(documentRepository.existsByNameDocument(nomDocument)){
 
-            documentRepository.deleteByName(nomDocument); 
+            documentRepository.deleteByNameDocument(nomDocument); 
             return true;
 
         }

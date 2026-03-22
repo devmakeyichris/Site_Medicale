@@ -3,6 +3,7 @@ package app.pfe.service;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import app.pfe.entity.Docteur;
@@ -16,10 +17,12 @@ public class DocteurService {
 
     private final  DocteurRepository docteurRepository;
     private final DocumentRepository documentRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public DocteurService(DocteurRepository docteurRepository,DocumentRepository documentRepository) {
+    public DocteurService(DocteurRepository docteurRepository,DocumentRepository documentRepository, PasswordEncoder passwordEncoder) {
         this.docteurRepository = docteurRepository;
         this.documentRepository = documentRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -30,6 +33,7 @@ public class DocteurService {
         if(docteurRepository.existsDocteurByEmailDocteur(docteur.getEmailDocteur())){
             throw new IllegalArgumentException("Cet email existe deja");
         }
+        docteur.setMotDePasseDocteur(passwordEncoder.encode(docteur.getMotDePasseDocteur()));
         docteur.setValider(false);
         docteurRepository.save(docteur);
         return docteur;
@@ -45,12 +49,17 @@ public class DocteurService {
     return docteurRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Docteur non trouvé avec id : " + id));
     }
+    
+
+    public List<Docteur> findDocteursValider() {
+        return docteurRepository.findByValiderTrue();
+    }
 
 
 
     public Docteur findDocteurByEmail(String email) {
 
-    return docteurRepository.findDocteurByEmailDocteur(email)
+    return docteurRepository.findByEmailDocteur(email)
         .orElseThrow(() -> new RuntimeException("Docteur non trouvé avec email : " + email));
     }
 
