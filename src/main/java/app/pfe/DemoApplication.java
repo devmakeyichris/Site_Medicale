@@ -23,25 +23,47 @@ public class DemoApplication {
 
 
     
-    @Bean
-    CommandLineRunner initRdv(RdvService rdvService, PatientService patientService, DocteurService docteurService){
-        return args -> {
-            Patient patient = patientService.getAllPatient().stream().findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("Aucun patient trouve"));
+    // @Bean
+    // CommandLineRunner initRdv(RdvService rdvService, PatientService patientService, DocteurService docteurService){
+    //     return args -> {
+    //         Patient patient = patientService.getAllPatient().stream().findFirst()
+    //         .orElseThrow(() -> new IllegalArgumentException("Aucun patient trouve"));
 
-            Docteur docteur = docteurService.getAllDocteurs().stream().findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("Aucun docteur trouve"));
+    //         Docteur docteur = docteurService.getAllDocteurs().stream().findFirst()
+    //         .orElseThrow(() -> new IllegalArgumentException("Aucun docteur trouve"));
 
-            Rdv rdv = new Rdv(LocalDateTime.now(), "10:00", patient, docteur);
+    //         Rdv rdv = new Rdv(LocalDateTime.now(), "10:00", patient, docteur);
             
-            rdvService.addRdv(rdv, patient.getIdPatient(), docteur.getIdDocteur());
+    //         rdvService.addRdv(rdv, patient.getIdPatient(), docteur.getIdDocteur());
 
            
 
 
             
-        };
+    //     };
     
-    }
+    // }
+
+
+//     @Bean
+// CommandLineRunner initRdv(RdvService rdvService, PatientService patientService, DocteurService docteurService){
+//     return args -> {
+//         // 1. Créer un nouveau patient
+//         Patient newPatient = new Patient();
+//         newPatient.setNomPatient("Dupont");
+//         newPatient.setPrenomPatient("Jean");
+//         newPatient.setEmailPatient("jean.dupont@tets2.com");
+//         newPatient.setMotDePassePatient("1234"); // à encoder si tu utilises Spring Security
+//         newPatient.setTelPatient("0612345678");
+//         newPatient.setAdressePatient("Rue de Fès");
+//         newPatient.setVillePatient("Fès");
+
+//         // 2. Sauvegarder le patient
+//         Patient patient = patientService.addPatient(newPatient);
+
+      
+//     };
 }
+
+
 

@@ -1,13 +1,25 @@
-PUT http://localhost:8086/updateRdv
+# PUT http://localhost:8086/updateRdv
+# Content-Type: application/json
+
+# {
+#   "idPatient": 1,
+#   "idDocteur": 1,
+#   "rdv": {
+#     "idRdv": 1,
+#     "dateRdv": "2026-02-20T10:00",
+#     "heureRdv": "15:00",
+#     "statusRdv": "ATTENTE"
+#   }
+# }
+
+##login
+
+
+POST http://localhost:8086/auth/login
 Content-Type: application/json
 
 {
-  "idPatient": 1,
-  "idDocteur": 1,
-  "rdv": {
-    "idRdv": 1,
-    "dateRdv": "2026-02-20T10:00",
-    "heureRdv": "15:00",
-    "statusRdv": "ATTENTE"
-  }
+  "email": "jean.dupont@test2.com",
+  "password": "1234"
 }
+

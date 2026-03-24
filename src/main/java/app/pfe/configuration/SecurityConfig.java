@@ -19,7 +19,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()) // syntaxe Lambda DSL
         .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/updateRdv").permitAll() // autorise sans login
+        .requestMatchers("/auth/login").permitAll() // autorise sans login
         .anyRequest().authenticated()
         );
         

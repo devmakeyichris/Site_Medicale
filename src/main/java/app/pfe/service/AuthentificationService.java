@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import app.pfe.component.JwtUtil;
 import app.pfe.entity.Docteur;
+import app.pfe.entity.Admin;
 import app.pfe.entity.Patient;
+import app.pfe.repository.AdminRepository;
 import app.pfe.repository.DocteurRepository;
 import app.pfe.repository.PatientRepository;
 
@@ -17,19 +19,21 @@ public class AuthentificationService {
     private final DocteurRepository docteurRepository;
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
-    private final AdminService adminService;
+    private final AdminRepository adminRepository;
     
     public AuthentificationService(PatientRepository patientRepository,
-    DocteurRepository docteurRepository,JwtUtil jwtUtil,PasswordEncoder passwordEncoder,AdminService adminService) {
+    DocteurRepository docteurRepository,JwtUtil jwtUtil,PasswordEncoder passwordEncoder,AdminRepository adminRepository) {
         this.patientRepository = patientRepository;
         this.docteurRepository = docteurRepository;
         this.jwtUtil = jwtUtil;
         this.passwordEncoder = passwordEncoder;
-        this.adminService = adminService;
+        this.adminRepository = adminRepository;
     }
     
     public String login(String email, String password) {
+        
         Patient patient = patientRepository.findByEmailPatient(email).orElse(null);
+        
         if (patient != null && passwordEncoder.matches(password, patient.getMotDePassePatient())) {
             return jwtUtil.generateToken(patient.getEmailPatient(), "PATIENT");
         }
@@ -39,7 +43,7 @@ public class AuthentificationService {
             return jwtUtil.generateToken(docteur.getEmailDocteur(), "DOCTEUR");
         }
         
-        Admin admin = adminService.findByEmail(email).orElse(null);
+        Admin admin = adminRepository.findByEmailAdmin(email).orElse(null);
         if (admin != null && passwordEncoder.matches(password, admin.getMotDePasseAdmin())) {
             return jwtUtil.generateToken(admin.getEmailAdmin(), "ADMIN");
         }

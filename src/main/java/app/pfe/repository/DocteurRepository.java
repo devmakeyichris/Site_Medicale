@@ -21,5 +21,6 @@ public interface DocteurRepository extends JpaRepository<Docteur, Integer> {
     boolean deleteDocteurByEmailDocteur(String email);
 
     List<Docteur> findByValiderTrue();
+
     
 }

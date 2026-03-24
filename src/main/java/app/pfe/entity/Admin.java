@@ -17,6 +17,26 @@ public class Admin {
 
     private String emailAdmin;
     private String motDePasseAdmin;
+
+    
+    public Integer getIdAdmin() {
+        return idAdmin;
+    }
+    public void setIdAdmin(Integer idAdmin) {
+        this.idAdmin = idAdmin;
+    }
+    public String getEmailAdmin() {
+        return emailAdmin;
+    }
+    public void setEmailAdmin(String emailAdmin) {
+        this.emailAdmin = emailAdmin;
+    }
+    public String getMotDePasseAdmin() {
+        return motDePasseAdmin;
+    }
+    public void setMotDePasseAdmin(String motDePasseAdmin) {
+        this.motDePasseAdmin = motDePasseAdmin;
+    }
 }
 
     
