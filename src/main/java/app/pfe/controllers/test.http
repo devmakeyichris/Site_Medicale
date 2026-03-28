@@ -1,25 +1,66 @@
-# PUT http://localhost:8086/updateRdv
-# Content-Type: application/json
+PUT http://localhost:8086/updateRdv
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWFuLmR1cG9udEB0ZXRzMy5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc3NDM5MzI3MSwiZXhwIjoxNzc0Mzk2ODcxfQ.d6XeMEX6f-op9TRbRbdQLgE1rd8hsl17xABQv9n99jw
 
-# {
-#   "idPatient": 1,
-#   "idDocteur": 1,
-#   "rdv": {
-#     "idRdv": 1,
-#     "dateRdv": "2026-02-20T10:00",
-#     "heureRdv": "15:00",
-#     "statusRdv": "ATTENTE"
-#   }
-# }
+{
+   "idPatient": 1,
+   "idDocteur": 1,
+   "rdv": {
+     "idRdv": 1,
+     "dateRdv": "2026-02-20T10:00",
+     "heureRdv": "15:00",
+     "statusRdv": "ATTENTE"
+   }
+ }
 
 ##login
 
 
-POST http://localhost:8086/auth/login
+# POST http://localhost:8087/auth/login
+# Content-Type: application/json
+
+# {
+#   "email": "jean.dupont@tets3.com",
+#   "password": "1234"
+# }
+
+###
+
+# Exemple d'utilisation du token JWT pour une requête authentifiée
+# Remplacez {{auth_token}} par le token reçu de la réponse de login
+
+# GET http://localhost:8086/patients/getAll
+# Authorization: Bearer {{auth_token}}
+
+POST http://localhost:8086/docteur/add
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWFuLmR1cG9udEB0ZXRzMy5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc3NDM5MzI3MSwiZXhwIjoxNzc0Mzk2ODcxfQ.d6XeMEX6f-op9TRbRbdQLgE1rd8hsl17xABQv9n99jw
 Content-Type: application/json
 
+ {
+   "nomDocteur": "Dupont",
+   "prenomDocteur": "Jean",
+   "emailDocteur": "jean.dupont@test.com",
+   "motDePasseDocteur": "password123",
+   "specialite": "Cardiologie"
+ }
+
+###
+
+POST http://localhost:8086/patients/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWFuLmR1cG9udEB0ZXRzMy5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc3NDM5MzI3MSwiZXhwIjoxNzc0Mzk2ODcxfQ.d6XeMEX6f-op9TRbRbdQLgE1rd8hsl17xABQv9n99jw
+
 {
-  "email": "jean.dupont@test2.com",
-  "password": "1234"
+  "adressePatient": "123 rue Exemple",
+  "dNaissPatient": "1990-01-01",
+  "emailPatient": "nouveau.patient@test.com",
+  "nomPatient": "Nouveau",
+  "prenomPatient": "Patient",
+  "sexePatient": "femme",
+  "telPatient": "0601020304",
+  "villePatient": "Casablanca",
+  "motDePassePatient": "securePassword123"
 }
+
+
 

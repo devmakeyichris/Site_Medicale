@@ -45,25 +45,26 @@ public class DemoApplication {
     // }
 
 
-//     @Bean
-// CommandLineRunner initRdv(RdvService rdvService, PatientService patientService, DocteurService docteurService){
+// @Bean
+//  CommandLineRunner initRdv(RdvService rdvService, PatientService patientService, DocteurService docteurService){
 //     return args -> {
-//         // 1. Créer un nouveau patient
-//         Patient newPatient = new Patient();
-//         newPatient.setNomPatient("Dupont");
-//         newPatient.setPrenomPatient("Jean");
-//         newPatient.setEmailPatient("jean.dupont@tets2.com");
-//         newPatient.setMotDePassePatient("1234"); // à encoder si tu utilises Spring Security
-//         newPatient.setTelPatient("0612345678");
-//         newPatient.setAdressePatient("Rue de Fès");
-//         newPatient.setVillePatient("Fès");
+//          // 1. Créer un nouveau patient
+//          Patient newPatient = new Patient();
+//          newPatient.setNomPatient("Dupe");
+//          newPatient.setPrenomPatient("Jeanne");
+//          newPatient.setEmailPatient("jean.dupont@tets3.com");
+//          newPatient.setMotDePassePatient("1234"); // à encoder si tu utilises Spring Security
+//          newPatient.setTelPatient("0612345678");
+//          newPatient.setAdressePatient("Rue de Fès");
+//          newPatient.setVillePatient("Fès");
 
-//         // 2. Sauvegarder le patient
-//         Patient patient = patientService.addPatient(newPatient);
+//          // 2. Sauvegarder le patient
+//          Patient patient = patientService.addPatient(newPatient);
 
       
-//     };
+//      };
 }
+
 
 
 
